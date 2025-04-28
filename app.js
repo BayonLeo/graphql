@@ -335,8 +335,8 @@ function generateGraphBar() {
         const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
         rect.setAttribute("x", x);
         rect.setAttribute("y", y);
-        rect.setAttribute("width", barWidth - 5);
-        rect.setAttribute("height", barHeight);
+        const safeWidth = Math.max(1, barWidth - 5); // Ensure width is at least 1
+        rect.setAttribute("width", safeWidth);        rect.setAttribute("height", barHeight);
         rect.setAttribute("fill", item.type === "up" ? "var(--success-color)" : "var(--error-color)");
         rect.setAttribute("rx", "3");
         svg.appendChild(rect);
