@@ -77,6 +77,10 @@ async function fetchUserData() {
                             type
                             createdAt
                         }
+                        level: transactions(where: {type: {_eq: "level"}}, order_by: {createdAt: desc}, limit: 1) {
+                            amount
+                            createdAt
+                        }
                     }
                     transaction {
                         id
@@ -180,12 +184,7 @@ function profilUser(contentPage) {
 }
 
 function foundLevelUser() {
-    for (let i = 0; i < infoUser.transactions.length-1; i++) {
-        if (infoUser.transactions[i].type === "level") {
-            return infoUser.transactions[i].amount;
-        }
-    }
-    return "N/A";
+    return infoUser.level && infoUser.level.length > 0 ? infoUser.level[0].amount : "N/A";
 }
 
 function transactionsEXP() {
